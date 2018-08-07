@@ -1,0 +1,12 @@
+{
+	"name": "#(service.name)",
+	"endpoints": [{
+		"path": "/v1/analysis/area-intersect",
+		"method": "GET",
+		"binary": true,
+		"redirect": {
+			"method": "GET",
+			"path": "/api/v1/analysis/area-intersect"
+		}
+	}]
+}
