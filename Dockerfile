@@ -27,7 +27,7 @@ RUN addgroup $USER \
     && adduser -s /bin/bash -D -G $USER $USER \
     && easy_install pip \
     && pip install --upgrade pip \
-    && pip install virtualenv gunicorn gevent numpy flask-restful \
+    && pip install virtualenv gunicorn gevent numpy \
     && pip install shapely --no-binary shapely \
     && mkdir -p /opt/$NAME \
     && cd /opt/$NAME \

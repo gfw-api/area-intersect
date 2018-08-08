@@ -1,9 +1,10 @@
 """API ROUTER"""
 
 import logging
-
+import flask
 from flask import jsonify, Blueprint, request
 from area_intersect.utils import getlist
+from area_intersect.utils.geostore import get_geostore
 
 router_endpoints = Blueprint('router_endpoints', __name__)
 
@@ -14,22 +15,17 @@ router_endpoints = Blueprint('router_endpoints', __name__)
 @router_endpoints.route('/area-intersect', strict_slashes=False, methods=['GET'])
 def area_intersect():
     """World Endpoint"""
-    #parser = reqparse.RequestParser()
-    #parser.add_argument('geostore',)
-    #parser.add_argument('ws', action='append')
+
     logging.info('[ROUTER]: Parse webservics')
-
-    #args = parser.parse_args()
-
-    #geostore_id = args['geostore']
-    #webservices = args['ws']
 
     args = request.args
 
     geostore_id = request.args.get('geostore', None)
     webservices = getlist('ws', args)
 
-    result = {"geostore": geostore_id, "webservices":str(webservices),
-              "args": args}
+    geostore = get_geostore(geostore_id=geostore_id, format="geojson")
+
+    result = {"geostore": geostore, "webservices":str(webservices),
+              "args": args, "flask": flask.__version__}
 
     return jsonify(data=result), 200
