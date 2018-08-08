@@ -1,1 +1,1 @@
-from area_intersect.tests.test_basic import BasicTest
+from area_intersect.tests.test_utils import UtilsTest
