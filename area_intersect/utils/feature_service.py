@@ -89,7 +89,7 @@ def get_features(service_url, fields, geometry, where='1=1', format='geojson'):
     logging.debug('[UTILS]: where: {}'.format(where))
     logging.debug('[UTILS]: format: {}'.format(format))
 
-    #TODO assess: geometry is esrijson
+    # TODO assess: geometry is esrijson
 
     payload = {"where": (None, where),
                "geometry": (None, json.dumps(geometry)),
@@ -102,13 +102,13 @@ def get_features(service_url, fields, geometry, where='1=1', format='geojson'):
 
     logging.debug('[UTILS]: payload: {}'.format(payload))
 
-    #try:
-    r = requests.post(service_url + "/query", files=payload)
+    try:
+        r = requests.post(service_url + "/query", files=payload)
 
-    logging.info('[UTILS]: FeatureService response: {}'.format(r.text))
-    if r.status_code == 200:
-            return r.json()
-    else:
-            return {"errors":[{"status":r.status_code, "detail":r.text}]}
-    #except:
-    #   return {"errors":[{"status":400, "detail":"Not a valid request"}]}
+        logging.info('[UTILS]: FeatureService response: {}'.format(r.text))
+        if r.status_code == 200:
+                return r.json()
+        else:
+                return {"errors":[{"status":r.status_code, "detail":r.text}]}
+    except:
+       return {"errors":[{"status":400, "detail":"Not a valid request"}]}

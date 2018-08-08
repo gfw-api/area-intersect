@@ -5,6 +5,7 @@ from flask import jsonify, Blueprint, request
 from area_intersect.utils import getlist
 from area_intersect.utils.geostore import get_geostore
 from area_intersect.utils.feature_service import get_service_info, get_features
+from area_intersect.utils.geoprocessing import intersection
 
 from area_intersect.routes.api import error
 
@@ -53,7 +54,11 @@ def area_intersect():
         else:
             intersecting_geoms.append(geoms)
 
+        for geom in intersecting_geoms:
+            inter = intersection(geostore["data"]["attributes"]["geojson"],geom)
+
+
     result = {"geostore": geostore, "webservices":str(webservices),
-              "args": args, "geoms": intersecting_geoms}
+              "args": args, "geoms": intersecting_geoms, "inter": inter}
 
     return jsonify(data=result), 200
