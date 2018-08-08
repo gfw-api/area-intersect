@@ -1,1 +1,1 @@
-from area_intersect.tests.test_utils import UtilsTest
+from area_intersect.tests.test_utils_geostore import UtilsTest
