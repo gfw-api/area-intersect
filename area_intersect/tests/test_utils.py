@@ -1,4 +1,5 @@
 import unittest
+from area_intersect import app
 from area_intersect.utils import getlist
 from werkzeug.datastructures import MultiDict
 
